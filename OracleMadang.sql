@@ -148,3 +148,16 @@ SELECT * FROM Book WHERE price>=33000;
 
 DROP INDEX ix_Book;
 
+CREATE OR REPLACE PROCEDURE InsertBook(
+    myBookID IN NUMBER,
+    myBookName IN VARCHAR2,
+    myPublisher IN VARCHAR2,
+    myPrice IN NUMBER)
+AS
+BEGIN
+    INSERT INTO Book(bookid, bookname, publisher, price)
+    VALUES(myBookID, myBookName, myPublisher, myPrice);
+END;
+
+EXEC InsertBook (13, '스포츠과학', '마당과학서적', 25000);
+SELECT * FROM book;
