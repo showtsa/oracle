@@ -148,4 +148,3 @@ SELECT * FROM Book WHERE price>=33000;
 
 DROP INDEX ix_Book;
 
-zz
