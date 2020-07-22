@@ -148,16 +148,27 @@ SELECT * FROM Book WHERE price>=33000;
 
 DROP INDEX ix_Book;
 
-CREATE OR REPLACE PROCEDURE InsertBook(
-    myBookID IN NUMBER,
-    myBookName IN VARCHAR2,
-    myPublisher IN VARCHAR2,
-    myPrice IN NUMBER)
-AS
-BEGIN
-    INSERT INTO Book(bookid, bookname, publisher, price)
-    VALUES(myBookID, myBookName, myPublisher, myPrice);
-END;
-
 EXEC InsertBook (13, '스포츠과학', '마당과학서적', 25000);
 SELECT * FROM book;
+
+EXEC BookInsertOrUpdate(15, '스포츠 즐거움', '마당과학서적', 25000);
+SELECT * FROM Book;
+
+EXEC BookInsertOrUpdate(15, '스포츠 즐거움', '마당과학서적', 20000);
+SELECT * FROM Book;
+
+SET SERVEROUTPUT ON;
+
+EXEC Interest;
+
+CREATE TABLE Book_log (
+    bookid_l NUMBER,
+    bookname_l VARCHAR2(40),
+    publisher_l VARCHAR2(40),
+    price_l NUMBER);
+    
+INSERT INTO Book VALUES(14, '스포츠 과학 1', '이상미디어', 25000);
+SELECT * FROM Book WHERE bookid = '14';
+SELECT * FROM Book_log WHERE bookid_l = '14';
+
+SELECT custid, orderid, saleprice, fnc_Interest(saleprice) interest FROM Orders;
