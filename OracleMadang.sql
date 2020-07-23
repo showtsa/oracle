@@ -172,3 +172,82 @@ SELECT * FROM Book WHERE bookid = '14';
 SELECT * FROM Book_log WHERE bookid_l = '14';
 
 SELECT custid, orderid, saleprice, fnc_Interest(saleprice) interest FROM Orders;
+
+
+CREATE TABLE Summer (
+    sid NUMBER,
+    class   VARCHAR2(20),
+    price   NUMBER
+    );
+ INSERT INTO Summer VALUES (100, 'FORTRAN', 20000);
+ EXEC INSERTSUMMER(150, 'PASCAL', 15000);
+ EXEC INSERTSUMMER(200, 'C', 10000);
+ EXEC INSERTSUMMER(250, 'FORTRAN', 20000);
+ 
+ SELECT * FROM Summer;
+ 
+ SELECT price "C 수강료" FROM Summer WHERE class = 'C';
+ 
+ DELETE FROM Summer WHERE sid = 200;
+ 
+ SELECT price "C 수강료" FROM Summer WHERE class='C';
+
+EXEC INSERTSUMMER(200, 'C', 10000);
+
+EXEC INSERTSUMMER(NULL, 'JAVA', 25000);
+
+SELECT * FROM Summer;
+
+SELECT COUNT(*) 수강인원 FROM Summer;
+SELECT COUNT(*) 수강학생 FROM Summer WHERE sid IS NOT NULL;
+
+UPDATE Summer SET price='15000' WHERE class = 'FORTRAN';
+
+SELECT * FROM Summer;
+
+SELECT DISTINCT price "FORTRAN 수강료" FROM Summer WHERE class='FORTRAN';
+UPDATE Summer SET price='20000' WHERE class='FORTRAN';
+UPDATE Summer SET price='15000' WHERE class='FORTRAN' AND sid=100;
+
+SELECT * FROM Summer;
+
+SELECT price "FORTRAN 수강료" FROM Summer WHERE class='FORTRAN';
+UPDATE Summer SET price=20000 WHERE class='FORTRAN';
+DELETE FROM Summer WHERE sid IS NULL;
+
+CREATE TABLE SummerPrice(
+    class VARCHAR2(20),
+    price NUMBER
+    );
+
+INSERT INTO SummerPrice VALUES('FORTRAN', 20000);
+INSERT INTO SummerPrice VALUES('PASCAL', 15000);
+INSERT INTO SummerPrice VALUES('C', 10000);
+
+SELECT * FROM SummerPrice;
+
+CREATE TABLE SummerEnroll (
+    sid NUMBER,
+    class VARCHAR2(20)
+);
+
+INSERT INTO SummerEnroll VALUES(100, 'FORTRAN');
+INSERT INTO SummerEnroll VALUES(150, 'PASCAL');
+INSERT INTO SummerEnroll VALUES(200, 'C');
+INSERT INTO SummerEnroll VALUES(250, 'FORTRAN');
+
+SELECT * FROM SummerEnroll;
+
+DELETE FROM SummerEnroll WHERE sid=200;
+SELECT * FROM SummerEnroll;
+
+SELECT price "C 수강료" FROM SummerPrice WHERE class='C';
+INSERT INTO SummerPrice VALUES('JAVE', 25000);
+
+SELECT * FROM SummerPrice;
+
+SELECT * FROM SummerEnroll;
+
+UPDATE SummerPrice SET price=15000 WHERE class='FORTRAN';
+
+SELECT price "FORTRAN 수강료" FROM SummerPrice WHERE class='FORTRAN';
